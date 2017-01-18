@@ -1,5 +1,6 @@
 ﻿using System;
 using Polly.Utilities;
+using Polly.Metrics;
 
 namespace Polly.CircuitBreaker
 {
@@ -22,9 +23,12 @@ namespace Polly.CircuitBreaker
             Action onHalfOpen
             ) : base(durationOfBreak, onBreak, onReset, onHalfOpen)
         {
+            //_metrics = samplingDuration.Ticks < ResolutionOfCircuitTimer * NumberOfWindows
+            //    ? (IHealthMetrics)new SingleHealthMetrics(samplingDuration)
+            //    : (IHealthMetrics)new RollingHealthMetrics(samplingDuration, NumberOfWindows);
             _metrics = samplingDuration.Ticks < ResolutionOfCircuitTimer * NumberOfWindows
                 ? (IHealthMetrics)new SingleHealthMetrics(samplingDuration)
-                : (IHealthMetrics)new RollingHealthMetrics(samplingDuration, NumberOfWindows);
+                : (IHealthMetrics)new BucketHealthMetrics(samplingDuration, NumberOfWindows);
 
             _failureThreshold = failureThreshold;
             _minimumThroughput = minimumThroughput;

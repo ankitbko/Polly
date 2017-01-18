@@ -53,6 +53,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Fallback\FallbackEngineAsync.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Fallback\FallbackPolicy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Fallback\FallbackPolicyAsync.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\BucketedCounterStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\BucketedRollingCounterStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\BucketHealthMetrics.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\ExecutionCompleteEvent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\ExecutionCompleteEventStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\HealthCountStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\IEventStream.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Metrics\PollyEvent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policy.HandleSyntax.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Policy.ContextAndKeys.cs" />
