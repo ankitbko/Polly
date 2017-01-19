@@ -258,7 +258,7 @@ namespace Polly.Specs.CircuitBreaker
                 .AdvancedCircuitBreaker(
                     failureThreshold: 0.5,
                     samplingDuration: TimeSpan.FromSeconds(10),
-                    minimumThroughput: 4,
+                    minimumThroughput: 3,
                     durationOfBreak: TimeSpan.FromSeconds(30)
                 );
 
@@ -276,7 +276,7 @@ namespace Polly.Specs.CircuitBreaker
             breaker.CircuitState.Should().Be(CircuitState.Closed);
 
             // No adjustment to SystemClock.UtcNow, so all exceptions raised within same timeslice
-
+            Task.Delay(3000).Wait();
             breaker.Invoking(x => x.RaiseException<DivideByZeroException>())
                 .ShouldThrow<DivideByZeroException>();
             breaker.CircuitState.Should().Be(CircuitState.Open);

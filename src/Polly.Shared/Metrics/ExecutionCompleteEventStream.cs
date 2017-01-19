@@ -19,7 +19,7 @@ namespace Polly.Metrics
             readOnlyStream = writeOnlySubject.Publish().RefCount();
         }
 
-        public IObservable<ExecutionCompleteEvent> Observe() => readOnlyStream.Do(e => Debug.WriteLine("readOnly: " + e.Outcome));
+        public IObservable<ExecutionCompleteEvent> Observe() => readOnlyStream;
 
         public void Write(ExecutionCompleteEvent pollyEvent)
         {

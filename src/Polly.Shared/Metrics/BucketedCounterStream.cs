@@ -30,7 +30,7 @@ namespace Polly.Metrics
         {
             this.samplingDuration = samplingDuration;
             this.numberOfWindows = numberOfWindows;
-            var bucketSize = TimeSpan.FromMilliseconds(samplingDuration.TotalMilliseconds/numberOfWindows);
+            var bucketSize = TimeSpan.FromMilliseconds(samplingDuration.TotalMilliseconds / numberOfWindows);
             counterSubject = new BehaviorSubject<Output>(EmptyOutputValue());
             reduceBucketToSummary = (eventBucket) => eventBucket.Aggregate(EmptyBucketValue(), appendRawEventToBucket);
 
@@ -43,11 +43,9 @@ namespace Polly.Metrics
             bucketedStream = Observable.Defer(
                 () => stream
                     .Observe()
-                    .Do(t => Debug.WriteLine("bucket " + t))
                     .Window(bucketSize)
-                    .Do(t => Debug.WriteLine("bucket after window" + t))
                     .SelectMany(reduceBucketToSummary)
-                    .StartWith(emptyBucketsToStart));
+                    .StartWith(emptyBucketsToStart))
         }
 
         public Output GetLatest()
@@ -64,12 +62,11 @@ namespace Polly.Metrics
             }
         }
 
-        private void StartCachingStreamValuesIfUnstarted()
+        protected void StartCachingStreamValuesIfUnstarted()
         {
             if (subscription == null)
             {
-                if (subscription == null)
-                    subscription = Observe().Subscribe(counterSubject);
+                subscription = Observe().Subscribe(counterSubject);
             }
         }
 

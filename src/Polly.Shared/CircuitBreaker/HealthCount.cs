@@ -16,8 +16,8 @@ namespace Polly.CircuitBreaker
         {
             var failures = Failures;
             var successes = Successes;
-            failures += (int)bucketEventCounts[0];
-            successes += (int)bucketEventCounts[1];
+            failures += (int)bucketEventCounts[1];
+            successes += (int)bucketEventCounts[0];
             return new HealthCount { Failures = failures, Successes = successes};
         }
     }

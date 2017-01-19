@@ -21,6 +21,7 @@ namespace Polly.Metrics
         public HealthCountStream(IEventStream<ExecutionCompleteEvent> stream, TimeSpan samplingDuration, short numberOfWindows) 
             : base(stream, samplingDuration, numberOfWindows, ExecutionCompleteEvent.AppendEventToBucket, healthCheckAccumulator)
         {
+            StartCachingStreamValuesIfUnstarted();
         }
 
         private static Func<HealthCount, long[], HealthCount> healthCheckAccumulator =

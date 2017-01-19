@@ -19,12 +19,10 @@ namespace Polly.Metrics
         {
             Func<IObservable<Bucket>, IObservable<Output>> reduceWindowToSummary =
                 window => window.Scan(EmptyOutputValue(), reduceBucket)
-                                .Skip(numberOfWindows);
+                                .Skip(numberOfWindows-1);
 
             sourceStream = bucketedStream
-                            .Do(t => Debug.WriteLine("Rolling: " + t.ToString()))
                             .Window(numberOfWindows, 1)
-                            .Do(t => Debug.WriteLine("Rolling after window : " + t.ToString()))
                             .SelectMany(reduceWindowToSummary)
                             .Publish()
                             .RefCount();
