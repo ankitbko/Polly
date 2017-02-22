@@ -45,7 +45,7 @@ namespace Polly.Metrics
                     .Observe()
                     .Window(bucketSize)
                     .SelectMany(reduceBucketToSummary)
-                    .StartWith(emptyBucketsToStart))
+                    .StartWith(emptyBucketsToStart));
         }
 
         public Output GetLatest()
